@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코로나19 예방접종센터 상세 페이지</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="view">
+        <h1 class="underline">코로나19 예방접종센터 상세 페이지</h1>
+        <div class="view_form">
+          <table>
+            <tr>
+              <th>센터명</th>
+              <td>{{center.centerName}}</td>
+            </tr>
+            <tr>
+              <th>센터유형</th>
+              <td>{{center.centerType}}</td>
+            </tr>
+            <tr>
+              <th>주소</th>
+              <td>{{center.address}}</td>
+            </tr>
+            <tr>
+              <th>센터시설명</th>
+              <td>{{center.facilityName}}</td>
+            </tr>
+            <tr>
+              <th>전화번호</th>
+              <td>{{center.phoneNumber}}</td>
+            </tr>
+            <tr>
+              <th>생성일</th>
+              <td>{{center.createdAt}}</td>
+            </tr>
+            <tr>
+              <th>수정일</th>
+              <td>{{center.updatedAt}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        name: "view",
+        data: function () {
+          return {
+            center: {}
+          };
+        },
+        created() {
+          // url에서 파라미터정보 얻기.
+          const params = new URL(document.location).searchParams;
+          // localStorage에서 booklist로 저장된 도서 목록을 얻어온 후 JSON객체로 parsing한다.
+          const centerlist = JSON.parse(localStorage.getItem("centerlist"));
+          for (let obj of centerlist.data) {
+            // 보여줄 isbn을 찾았다면.
+            if (params.get("id") == obj.id) {
+              console.log(params.get("id"));
+              this.center = obj;
+              break;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

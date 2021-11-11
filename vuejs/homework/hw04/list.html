@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코로나19 예방접종센터</title>
+    <!-- <script src="centerList.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <center-list></center-list>
+    </div>
+
+    <script type="module">
+      import CenterList from "./components/CenterList.js";
+      new Vue({
+        el: "#app",
+        name: "list",
+        components: {
+          CenterList,
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코로나19 예방접종센터</title>
+    <script src="centerList.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h1 class="underline">코로나19 예방접종센터 목록</h1>
+        <div v-if="data.length">
+          <table id="center-list">
+            <colgroup>
+              <col style="width: 5%" />
+              <col style="width: 20%" />
+              <col style="width: 40%" />
+              <col style="width: 20%" />
+              <col style="width: 15%" />
+            </colgroup>
+            <label for="">지역</label>
+            <select v-model="location">
+              <option>전체</option>
+              <option>서울특별시</option>
+              <option>충청남도</option>
+              <option>광주광역시</option>
+              <option>경상남도</option>
+              <option>대구광역시</option>
+            </select>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>센터명</th>
+                <th>생성일</th>
+                <th>수정일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(center, index) in matchLocation"
+                :key="index"
+                v-if="center.sido === location"
+              >
+                <td>{{center.id}}</td>
+                <td>
+                  <a :href="'detail.html?id='+ center.id"
+                    >{{center.centerName}}</a
+                  >
+                </td>
+                <td>{{center.createdAt}}</td>
+                <td>{{center.updatedAt}}</td>
+              </tr>
+
+              <tr
+                v-for="(center, index) in data"
+                :key="index"
+                v-if=" location === '전체'"
+              >
+                <td>{{center.id}}</td>
+                <td>
+                  <a :href="'detail.html?id='+ center.id"
+                    >{{center.centerName}}</a
+                  >
+                </td>
+                <td>{{center.createdAt}}</td>
+                <td>{{center.updatedAt}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div v-else class="text-center">게시글이 없습니다.</div>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        name: "list",
+        data() {
+          return {
+            location: "",
+            data: [],
+          };
+        },
+        created() {
+          const centerlist = localStorage.getItem("centerlist");
+          let newCenter = {
+            data: [],
+          };
+          if (centerlist) {
+            newCenter = JSON.parse(centerlist);
+          } else {
+            localStorage.setItem("centerlist", JSON.stringify(newCenter));
+          }
+          this.data = newCenter.data;
+        },
+        computed: {
+          matchLocation: function () {
+            return this.data.filter(locate => locate.sido === this.location);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
