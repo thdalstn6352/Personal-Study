@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>도서관리</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <a href="index.html">
+          <img src="./img/ssafy_logo.png" class="ssafy_logo"
+        /></a>
+        <p class="logo">도서관리</p>
+      </div>
+      <div>
+        <h1>SSAFY 도서 삭제</h1>
+        <div>삭제중...</div>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        name: "delete",
+        created() {
+          // url에서 파라미터정보 얻기.
+          const params = new URL(document.location).searchParams;
+          const location =
+            "http://localhost:9999/vuews/book/" + params.get("isbn");
+
+          axios.delete(location);
+          alert("삭제가 완료되었습니다.");
+          this.movePage();
+        },
+        methods: {
+          movePage() {
+            location.href = "list.html";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
