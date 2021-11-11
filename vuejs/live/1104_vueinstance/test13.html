@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>v-for와 v-if 같이 사용하기</h2>
+      <input type="number" v-model.number="count" />
+      <h2>배열(객체)의 값</h2>
+      <ul>
+        <!-- <li v-for="ssafy in ssafys" :key="ssafys.region" v-if="ssafy.count === count">{{ssafy.region}} : {{ssafy.count}}개</li> -->
+        <li
+          v-for="ssafy in mathchSsafy"
+          :key="ssafys.region"
+          v-if="ssafy.count === count"
+        >
+          {{ssafy.region}} : {{ssafy.count}}개
+        </li>
+      </ul>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            count: 0,
+            ssafys: [
+              { region: "부울경", count: 2 },
+              { region: "구미", count: 3 },
+              { region: "서울", count: 4 },
+              { region: "부울경", count: 5 },
+              { region: "부울경", count: 6 },
+            ],
+          };
+        },
+        computed: {
+          mathchSsafy: function () {
+            return this.ssafys.filter(ssafy => ssafy.count === this.count);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
