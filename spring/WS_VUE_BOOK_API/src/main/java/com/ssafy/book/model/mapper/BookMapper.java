@@ -14,6 +14,7 @@ public interface BookMapper {
 
 	int modify(BookDto bookDto);
 
+	void deleteComment(String isbn);
 	int delete(String isbn);
 	
 }

@@ -51,6 +51,7 @@
 			<item value=""/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="/Users/songminsoo/Downloads/happyhouse_vue_-_8-_-_.zip"/>
 			<item value="/Users/songminsoo/Downloads/데일리 실습_Framework Vue.js_04_3_제공파일.zip"/>
 		</list>
 	</section>
@@ -59,6 +60,9 @@
 		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="/Users/songminsoo/git/happyhouse_vue_-_8-_-_"/>
+		</list>
 	</section>
 	<section name="ChooseWorkspaceDialogSettings">
 		<item key="DIALOG_X_ORIGIN" value="407"/>

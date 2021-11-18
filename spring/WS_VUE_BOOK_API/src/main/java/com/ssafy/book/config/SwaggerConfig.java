@@ -22,7 +22,7 @@ public class SwaggerConfig {
 				.apiInfo(apiInfo())
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.ssafy.book.controller"))
-				.paths(PathSelectors.ant("/book/**"))
+//				.paths(PathSelectors.ant("/book/**"))
 				.build();
 	}
 
