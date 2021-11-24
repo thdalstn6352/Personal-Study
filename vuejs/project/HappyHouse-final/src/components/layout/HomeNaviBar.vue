@@ -106,11 +106,14 @@ export default {
 </script>
 
 <style scoped>
-b-navbar {
-  border: solid 1px black;
-  border-bottom: black;
+.navbar {
+  background-image: linear-gradient(
+    134deg,
+    rgb(19, 183, 207) -5%,
+    rgb(54, 91, 180) 56%,
+    rgb(54, 91, 180) 56%
+  );
 }
-
 span {
   color: black;
 }

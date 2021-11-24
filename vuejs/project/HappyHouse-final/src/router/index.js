@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
-import Instargram from "@/views/Instargram.vue";
+import Favorite from "@/views/HouseFavorite.vue";
 
 import Member from "@/views/Member.vue";
 import MemberLogin from "@/components/user/MemberLogin.vue";
@@ -16,6 +16,11 @@ import BoardView from "@/components/board/BoardView.vue";
 import BoardUpdate from "@/components/board/BoardUpdate.vue";
 
 import House from "@/views/House.vue";
+import HouseDetail from "@/components/house/HouseDetail.vue";
+import HouseView from "@/components/house/HouseView.vue";
+import RecentView from "@/components/house/HouseRecentView.vue";
+import WatchList from "@/components/house/WatchList.vue";
+
 import store from "@/store/index.js";
 
 import Qna from "@/views/QnA.vue";
@@ -26,12 +31,12 @@ import QnaUpdate from "@/components/qna/QnaUpdate.vue";
 Vue.use(VueRouter);
 
 const onlyAuthUser = async (to, from, next) => {
-  // console.log(store);
+  console.log("hihi");
   const checkUserInfo = store.getters["memberStore/checkUserInfo"];
-  const getUserInfo = store._actions["memberStore/getUserInfo"];
+  // const getUserInfo = store._actions["memberStore/getUserInfo"];
   let token = sessionStorage.getItem("access-token");
   if (checkUserInfo == null && token) {
-    await getUserInfo(token);
+    // await getUserInfo(token);
   }
   if (checkUserInfo === null) {
     alert("로그인이 필요한 페이지입니다..");
@@ -50,9 +55,22 @@ const routes = [
     component: Home,
   },
   {
-    path: "/instargram",
-    name: "Instargram",
-    component: Instargram,
+    path: "/favorite",
+    name: "Favorite",
+    component: Favorite,
+    redirect: "/favorite/recentview",
+    children: [
+      {
+        path: "recentview",
+        name: "RecentView",
+        component: RecentView,
+      },
+      {
+        path: "watchlist",
+        name: "WatchList",
+        component: WatchList,
+      },
+    ],
   },
   {
     path: "/user",
@@ -117,6 +135,19 @@ const routes = [
     path: "/house",
     name: "House",
     component: House,
+    redirect: "/house/view",
+    children: [
+      {
+        path: "view",
+        name: "HouseView",
+        component: HouseView,
+      },
+      {
+        path: "detail",
+        name: "HouseDetail",
+        component: HouseDetail,
+      },
+    ],
   },
   {
     path: "*",

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { sidoList, gugunList, houseList } from "@/api/house.js";
+import { sidoList, gugunList, houseList, aroundList } from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -8,6 +8,9 @@ const houseStore = {
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    arounds: [],
+    markers: [],
+    recents: [],
   },
 
   getters: {},
@@ -35,6 +38,15 @@ const houseStore = {
     },
     SET_DETAIL_HOUSE: (state, house) => {
       state.house = house;
+    },
+    SET_AROUND_LIST: (state, data) => {
+      state.arounds = data;
+    },
+    SET_MARKER_LIST: (state, data) => {
+      state.markers = data;
+    },
+    SET_RECENT_LIST: (state, data) => {
+      state.recents = data;
     },
   },
 
@@ -69,12 +81,14 @@ const houseStore = {
       // vue cli enviroment variables 검색
       //.env.local file 생성.
       // 반드시 VUE_APP으로 시작해야 한다.
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+      // const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+      // const SERVICE_KEY =
+      //   "PdIWX7uJ0xSSI9JZ95aZZauuxtk0z5MSUs1sUq6th8uytplflwZkegSbl4PSkIfWQH9ZQMEVPUI9LoEgksZq%2Fw%3D%3D";
       const params = {
         LAWD_CD: gugunCode,
-        DEAL_YMD: "202110",
-        serviceKey: decodeURIComponent(SERVICE_KEY),
+        // DEAL_YMD: "202110",
       };
+      console.log(params);
       houseList(
         params,
         response => {
@@ -90,6 +104,19 @@ const houseStore = {
     detailHouse: ({ commit }, house) => {
       // 나중에 house.일련번호를 이용하여 API 호출
       commit("SET_DETAIL_HOUSE", house);
+    },
+    getAround: ({ commit }, center) => {
+      center,
+        aroundList(
+          center,
+          ({ data }) => {
+            // console.log(commit, response);
+            commit("SET_AROUND_LIST", data);
+          },
+          error => {
+            console.log(error);
+          }
+        );
     },
   },
 };

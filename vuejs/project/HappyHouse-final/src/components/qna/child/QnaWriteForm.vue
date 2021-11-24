@@ -28,7 +28,7 @@
             id="subject"
             v-model="qnaForm.subject"
             type="text"
-            ref="subject"
+            required
             placeholder="제목 입력..."
           ></b-form-input>
         </b-form-group>
@@ -36,7 +36,6 @@
         <b-form-group id="content-group" label="내용:" label-for="content">
           <b-form-textarea
             id="content"
-            ref="content"
             v-model="qnaForm.content"
             placeholder="내용 입력..."
             rows="10"
